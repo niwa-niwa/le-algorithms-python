@@ -78,3 +78,26 @@ def second_quick_sort(numbers):
     return numbers
 
 print(second_quick_sort(nums))
+
+
+def new_quick_sort(numbers):
+    def _partition(numbers, low, high):
+        i = low-1
+        for j in range(high) :
+            if numbers[j] < numbers[high] :
+                i+=1
+                numbers[j], numbers[i] = numbers[i], numbers[j]
+        i+=1
+        numbers[high], numbers[i] = numbers[i], numbers[high]
+        return i
+
+    def _quick_sort(numbers, low, high):
+        if low < high :
+            pivot = _partition(numbers, low, high)
+            _quick_sort(numbers, low, pivot-1)
+            _quick_sort(numbers, pivot+1, high)
+        
+    _quick_sort(numbers, 0, len(numbers)-1)
+    return numbers
+
+print('new_quick_sort = ', new_quick_sort(nums))
