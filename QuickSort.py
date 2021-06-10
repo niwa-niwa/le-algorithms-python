@@ -24,7 +24,7 @@ from typing import List
 #     return numbers
 
 
-# import random
+import random
 # nums = [random.randint(0, 1000) for _ in range(10)]
 # print(nums)
 # print(quick_sort(nums))
@@ -55,6 +55,7 @@ def my_quick_sort(numbers):
     return numbers
 
 nums = [1,8,5,9,4,3,7]
+nums = [random.randint(0, 1000) for _ in range(10)]
 print(my_quick_sort(nums))
 
 def second_quick_sort(numbers):
@@ -101,3 +102,27 @@ def new_quick_sort(numbers):
     return numbers
 
 print('new_quick_sort = ', new_quick_sort(nums))
+
+
+def fast_quick_sort(numbers):
+    def _partition(numbers, low, high):
+        i = low-1
+        for j in range(high):
+            if numbers[j] < numbers[high]:
+                i+=1
+                numbers[i], numbers[j] = numbers[j], numbers[i]
+        i+=1
+        numbers[i], numbers[high] = numbers[high], numbers[i]
+        
+        return i
+
+    def _quick_sort(numbers, low, high):
+        if low < high:
+            pivot = _partition(numbers, low, high)
+            _quick_sort(numbers, low, pivot-1)
+            _quick_sort(numbers, pivot+1, high)
+    
+    _quick_sort(numbers, 0, len(numbers)-1)
+    return numbers
+
+print(fast_quick_sort(nums))
