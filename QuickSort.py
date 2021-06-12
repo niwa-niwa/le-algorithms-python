@@ -29,8 +29,6 @@ import random
 # print(nums)
 # print(quick_sort(nums))
 
-# TODO : it should be written by myself
-
 def my_quick_sort(numbers):
     def _partition(numbers, low, high):
         i = low-1
@@ -126,3 +124,25 @@ def fast_quick_sort(numbers):
     return numbers
 
 print(fast_quick_sort(nums))
+
+
+def force_quick_sort(numbers):
+    def _pertition(numbers, low, high):
+        i = low-1
+        for j in range(len(numbers)-1):
+            if numbers[j] < numbers[high]:
+                i += 1
+                numbers[i], numbers[j] = numbers[j], numbers[i]
+        i+=1
+        numbers[i], numbers[high] = numbers[high], numbers[i]
+        return i
+
+    def _quick_sort(numbers, low, high):
+        if low < high :
+            pertition = _pertition(numbers, low, high)
+            _quick_sort(numbers, low, pertition-1)
+            _quick_sort(numbers, pertition+1, high)
+    
+    _quick_sort(numbers, 0, len(numbers)-1)
+    return numbers
+print(force_quick_sort(nums))
