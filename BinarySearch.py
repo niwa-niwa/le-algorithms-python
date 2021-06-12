@@ -38,3 +38,18 @@ print("linear search result = ", result)
 
 result = binary_search(nums, value)
 print("binary search result = ", result)
+
+
+def my_binary_search(numbers, value):
+    def _binary_search(numbers, value, left, right):
+        while left <= right :
+            mid = (left + right) // 2
+            if numbers[mid] == value :
+                return mid
+            elif numbers[mid] < value :
+                return _binary_search(numbers, value, mid+1, right)
+            else :
+                return _binary_search(numbers, value, left, mid-1)
+        return -1
+    return _binary_search(numbers, value, 0, len(numbers)-1)
+print(my_binary_search(nums, value))
