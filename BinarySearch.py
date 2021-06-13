@@ -29,7 +29,7 @@ def binary_search(numbers: List[int], value: int) -> int:
 nums = [0, 1, 5, 7, 9, 11, 15, 20, 24]
 
 import random
-nums = [random.randint(0, 20) for _ in range(10)]
+nums = [random.randint(10, 20) for _ in range(10)]
 
 print(nums)
 value = 20
@@ -53,3 +53,20 @@ def my_binary_search(numbers, value):
         return -1
     return _binary_search(numbers, value, 0, len(numbers)-1)
 print(my_binary_search(nums, value))
+
+
+def second_binary_sort(numbers, value):
+    def _binary_sort(numbers, value, left, right):
+        if left <= right :
+            print(left, right)
+            mid = (left + right)//2
+            if numbers[mid] == value :
+                return mid
+            elif numbers[mid] < value :
+                return _binary_sort(numbers, value, mid+1, right)
+            else :
+                return _binary_sort(numbers, value, left, mid-1)
+        return -1
+    return _binary_sort(numbers, value, 0, len(numbers)-1)
+        
+print(second_binary_sort(nums, value))
