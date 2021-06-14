@@ -38,7 +38,6 @@ def merge_sort(numbers):
         merge_index += 1
 
     return numbers
-
 print(merge_sort(nums))
 
 
@@ -86,7 +85,7 @@ def fast_merge_sort(numbers):
 
     left_index = right_index = total_index = 0
     if left_index < len(left) and right_index < len(right) :
-        if left[left_index] <= right[right_index] :
+        if left[left_index] < right[right_index] :
             numbers[total_index] = left[left_index]
             left_index += 1
         else:
@@ -94,12 +93,12 @@ def fast_merge_sort(numbers):
             right_index += 1
         total_index += 1
     
-    if left_index < len(left):
+    while left_index < len(left):
         numbers[total_index] = left[left_index]
         left_index += 1
         total_index += 1
 
-    if right_index < len(right):
+    while right_index < len(right):
         numbers[total_index] = right[right_index]
         right_index += 1
         total_index += 1
@@ -107,3 +106,41 @@ def fast_merge_sort(numbers):
     return numbers
 
 print(fast_merge_sort(nums))
+
+
+def third_merge_sort(numbers):
+    if len(numbers) == 1:
+        return
+    
+    center = len(numbers) // 2
+    left = numbers[:center]
+    right = numbers[center:]
+
+    third_merge_sort(left)
+    third_merge_sort(right)
+
+    left_index = right_index = total_index = 0
+
+    while left_index <= len(left)-1 and right_index <= len(right)-1:
+        if left[left_index] < right[right_index]:
+            numbers[total_index] = left[left_index]
+            left_index += 1
+        else :
+            numbers[total_index] = right[right_index]
+            right_index += 1
+        total_index += 1
+
+    while right_index < len(right):
+        numbers[total_index] = right[right_index]
+        right_index += 1
+        total_index += 1
+
+    while left_index < len(left):
+        numbers[total_index] = left[left_index]
+        left_index += 1
+        total_index += 1
+    
+
+    
+    return numbers
+print(third_merge_sort(nums))

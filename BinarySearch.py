@@ -70,3 +70,21 @@ def second_binary_sort(numbers, value):
     return _binary_sort(numbers, value, 0, len(numbers)-1)
         
 print(second_binary_sort(nums, value))
+
+
+def third_binary_search(numbers, value):
+
+    def _binary_search(numbers, value, left, right):
+        if left <= right :
+            mid = (left+right) // 2
+            if numbers[mid] == value :
+                return mid
+            elif numbers[mid] < value :
+                return _binary_search(numbers, value, mid+1, right)
+            else :
+                return _binary_search(numbers, value, left, mid-1)
+        return -1
+
+    return _binary_search(numbers, value, 0, len(numbers)-1)
+
+print(third_binary_search(nums, value))

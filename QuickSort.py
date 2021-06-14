@@ -146,3 +146,26 @@ def force_quick_sort(numbers):
     _quick_sort(numbers, 0, len(numbers)-1)
     return numbers
 print(force_quick_sort(nums))
+
+
+def fifth_quick_sort(numbers):
+
+    def _partition(numbers, low, high):
+        i = low-1
+        for j in range(len(numbers)):
+            if numbers[j] < numbers[high]:
+                i += 1
+                numbers[i], numbers[j] = numbers[j], numbers[i]
+        i += 1
+        numbers[i], numbers[high] = numbers[high], numbers[i]
+        return i
+
+    def _quick_sort(numbers, low, high):
+        if low < high :
+            partition = _partition(numbers, low, high)
+            _quick_sort(numbers, low, partition-1)
+            _quick_sort(numbers, partition+1, high)
+    
+    _quick_sort(numbers, 0, len(numbers)-1)
+    return numbers
+print(fifth_quick_sort(nums))
