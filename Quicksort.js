@@ -1,44 +1,36 @@
-console.log('test script')
+console.log("Start QuickSort");
 
-function quickSort(numbers){
-
+function quickSort(numbers) {
   const _partition = (nums, low, high) => {
-    
-    const numbers = [...nums]
     let i = low - 1;
-    for(let j = low; j < numbers.length; j++){
-      
-      if(numbers[j] < numbers[high] ){
+    for (let j = low; j < numbers.length; j++) {
+      if (nums[j] < nums[high]) {
         i++;
-        [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+        [nums[i], nums[j]] = [nums[j], nums[i]];
       }
     }
     i++;
-    [numbers[i], numbers[high]] = [numbers[high], numbers[i]];
-    return {index:i, numbers:numbers}
-  }
+    [nums[i], nums[high]] = [nums[high], nums[i]];
+    return i;
+  };
 
   const _quickSort = (numbers, low, high) => {
-    if( low < high ){
+    if (low < high) {
       let partition = _partition(numbers, low, high);
-      _quickSort(partition.numbers, low, partition.index-1);
-      _quickSort(partition.numbers, partition.index+1, high);
+      _quickSort(numbers, low, partition - 1);
+      _quickSort(numbers, partition + 1, high);
     }
-  }
+  };
 
-  _quickSort(numbers, 0, numbers.length-1);
-  return numbers
-
+  _quickSort(numbers, 0, numbers.length - 1);
+  return numbers;
 }
 
-const nums = [1,8,5,9,4,3,7];
+let nums = [];
+for (let i = 0; i < 10; i++) {
+  nums[i] = Math.floor(Math.random() * 10) + 1;
+}
+console.log(nums);
+// nums = [1,8,5,9,4,6,7];
 const result = quickSort(nums);
-console.log("result = ",result);
-// console.log(quickSort(nums));
-// console.log(nums)
-// [nums[0], nums[5]] = [nums[5], nums[0]]
-// console.log(nums)
-
-// const arr = [1,2,3];
-// [arr[2], arr[1]] = [arr[1], arr[2]];
-// console.log(arr); // [1,3,2]
+console.log("result = ", result);
